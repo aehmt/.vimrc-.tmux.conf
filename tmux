@@ -1,1 +1,0 @@
-/Users/aehmt/.tmux.conf
