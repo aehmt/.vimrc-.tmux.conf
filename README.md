@@ -4,4 +4,9 @@ Current .vimrc and .tmux.conf setup I am using. Optimized for iTerm use.
 
 
 At the moment Terminal.app doesn't support truecolors with current setup.
-:set termguicolor to bring back colors.
+
+```
+:set termguicolor
+```
+
+to bring back colors.
