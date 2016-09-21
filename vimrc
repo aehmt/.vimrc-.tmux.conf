@@ -5,6 +5,9 @@ scriptencoding utf-8
 "If you're using tmux version 2.2 or later, remove the outermost $TMUX check.
    "For Neovim 0.1.3 and 0.1.4
 
+"refreshes changes automatically
+" set autoread
+" au CursorHold,CursorHoldI * checktime
 
 "let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 " be iMproved, required
@@ -135,7 +138,7 @@ Plugin 'edkolev/promptline.vim'
 " Plugin 'morhetz/gruvbox'
 " Plugin 'tyrannicaltoucan/vim-deep-space'
 "Plugin 'vim-scripts/Conque-Shell'
-"
+Plugin 'vim-airline/vim-airline-themes'
 "
 "
 " Plugin 'valloric/youcompleteme'
@@ -394,9 +397,9 @@ syntax on
 set cursorline
 colorscheme tender-contrast
 " enable tender airline theme
-let g:tender_airline = 1
+" let g:tender_airline = 1
 " set airline theme
-let g:airline_theme = 'tender'
+let g:airline_theme = 'base16_londontube'
 " colorscheme melanite
 " let g:airline_theme='onehalfdark'
 " let g:airline_theme='onehalfdark'
@@ -530,6 +533,9 @@ function! P_Compile()
 	if ( i == "rb" )
 		let c =  " ruby " .expand('%:p') 
 		return c
+  elseif ( i == 'js' )
+    let c =  " node " .expand('%:p')
+    return c
 	else
 		let c = " echo lol no compiler found "
 		return c
@@ -582,31 +588,33 @@ nmap <leader>x	:w \| call VimuxRunCommand(P_Compile()) <CR>
 nmap <leader>dd	:w \| call VimuxRunCommand("bundle install") <CR>
 nmap <leader>rf	:w \| call VimuxRunCommand("rspec --f-f") <CR>
 nmap <leader>rs	:w \| call VimuxRunCommand("rspec") <CR>
-nmap <leader>Q	:w \| call VimuxRunCommand(" rspec " .expand('%:p:h'). "/../spec/*" .expand('%:t:r')."*") <CR>
+nmap <leader>Q	:w \| call VimuxRunCommand("rspec " .expand('%:p:h'). "/../spec/*" .expand('%:t:r')."*") <CR>
 "nmap <leader>1q	:w \| call VimuxRunCommand(" rspec " .expand('%:p:h'). "/../spec/*" .expand('%:t:r')."* --f-f") <CR>
-nmap <leader>1s	:w \| call VimuxRunCommand(" rspec " .expand('%:p'). ":".line('.')) <CR>
+nmap <leader>1s	:w \| call VimuxRunCommand("rspec" .expand('%:p'). ":".line('.')) <CR>
 
 "end of the word in insert mode
 inoremap <C-z> <C-o>a
+nnoremap <C-z> a
 
 "db/schema.rb
-nmap <leader>db :call VimuxRunCommand(" cat db/schema.rb ") <CR>
+nmap <leader>db :call VimuxRunCommand("cat db/schema.rb") <CR>
 
 "rake routes
-nmap <leader>rr :call VimuxRunCommand(" rake routes ") <CR>
-nmap <leader>et :call VimuxRunCommand("!?_ENV") <CR>
+nmap <leader>rr :call VimuxRunCommand("rake routes") <CR>
+nmap <leader>et :call VimuxRunCommand("rake db:migrate RAILS_ENV=test") <CR>
 
 "Pry commands"
-nmap <leader>pry :call VimuxRunCommand(" pry ") <CR>
-nmap <leader>e :call VimuxRunCommand(" exit ") <CR>
-nmap <leader>ee :call VimuxRunCommand(" exit! ") <CR>
+nmap <leader>pry :call VimuxRunCommand("pry") <CR>
+nmap <leader>e :call VimuxRunCommand("exit") <CR>
+nmap <leader>ee :call VimuxRunCommand("exit! ") <CR>
 nmap <leader>r :call VimuxRunCommand(getline('.') ." ") <CR>
 vmap <leader>r :call VimuxRunCommand(getline('.') ." ") <CR>
 
 nmap <leader>t  :w \| call VimuxRunCommand("!!") <CR>
 nmap <leader>sg	:w \| call VimuxRunCommand("shotgun ") <CR>
 map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <leader>S	:w \| call VimuxRunCommand("learn && learn submit ") <CR>
+nmap <leader>S	:w \| call VimuxRunCommand("learn && learn submit") <CR>
+nmap <leader>lb	:w \| call VimuxRunCommand("learn -b") <CR>
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
@@ -618,3 +626,11 @@ endif
 if has('nvim')
   nmap <BS> <C-W>h
 endif
+
+      " \'win'  : ['#I',  '#(basename #{pane_current_path})'],
+let g:tmuxline_preset = {
+      \'a'    : '#S',
+      \'win'  : ['#I',  '#W'],
+      \'cwin' : ['#I', '#(basename #{pane_current_path})', '#F'],
+      \'y'    : ['%R', '%a', '%Y'],
+      \'z'    : '#H'}
