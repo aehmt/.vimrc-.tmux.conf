@@ -33,7 +33,6 @@ else
   let &t_8f="\e[38;2;%ld;%ld;%ldm"
   let &t_8b="\e[48;2;%ld;%ld;%ldm"
   set termguicolors
-    " let $tmp = "lolmeht"
     " set t_Co=256
     " set t_AB=^[[48;5;%dm
     " set t_AF=^[[38;5;%dm
@@ -62,8 +61,8 @@ else
 
 
   " Plugin key-mappings.
-  inoremap <expr><C-g>     neocomplete#undo_completion()
-  inoremap <expr><C-l>     neocomplete#complete_common_string()
+  " inoremap <expr><C-g>     neocomplete#undo_completion()
+  " inoremap <expr><C-l>     neocomplete#complete_common_string()
 
   " " Recommended key-mappings.
   " " <CR>: close popup and save indent.
@@ -288,8 +287,8 @@ let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-k>"
-let g:UltiSnipsJumpForwardTrigger="<c-k>"
+let g:UltiSnipsExpandTrigger="<c-n>"
+let g:UltiSnipsJumpForwardTrigger="<c-n>"
 let g:UltiSnipsJumpBackwardTrigger="<c-b>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
@@ -592,8 +591,14 @@ nmap <leader>Q	:w \| call VimuxRunCommand("rspec " .expand('%:p:h'). "/../spec/*
 "nmap <leader>1q	:w \| call VimuxRunCommand(" rspec " .expand('%:p:h'). "/../spec/*" .expand('%:t:r')."* --f-f") <CR>
 nmap <leader>1s	:w \| call VimuxRunCommand("rspec" .expand('%:p'). ":".line('.')) <CR>
 
-"end of the word in insert mode
-inoremap <C-z> <C-o>a
+"insert mode hjkl
+"run 2 commands below in terminal for nvim. for vim it's not neccessary
+"infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
+"tic $TERM.ti
+imap <C-h> <C-o>h
+imap <C-j> <C-o>j
+imap <C-k> <C-o>k
+imap <C-l> <C-o>l
 nnoremap <C-z> a
 
 "db/schema.rb
