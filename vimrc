@@ -595,10 +595,10 @@ nmap <leader>1s	:w \| call VimuxRunCommand("rspec" .expand('%:p'). ":".line('.')
 "run 2 commands below in terminal for nvim. for vim it's not neccessary
 "infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
 "tic $TERM.ti
-imap <C-h> <C-o>h
-imap <C-j> <C-o>j
-imap <C-k> <C-o>k
-imap <C-l> <C-o>l
+imap <C-h> <left>
+imap <C-j> <down>
+imap <C-k> <up>
+imap <C-l> <right>
 nnoremap <C-z> a
 
 "db/schema.rb
