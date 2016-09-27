@@ -287,9 +287,9 @@ let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
 
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-n>"
-let g:UltiSnipsJumpForwardTrigger="<c-n>"
-let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+let g:UltiSnipsExpandTrigger="<c-b>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-y>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 " lugin 'file:///home/gmarik/path/to/plugiu'
@@ -624,13 +624,13 @@ nmap <leader>lb	:w \| call VimuxRunCommand("learn -b") <CR>
 if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
 endif
-if has('nvim')
-  nmap <bs> :<c-u>TmuxNavigateLeft<cr>
-endif
+" if has('nvim')
+"   nmap <bs> :<c-u>TmuxNavigateLeft<cr>
+" endif
 
-if has('nvim')
-  nmap <BS> <C-W>h
-endif
+" if has('nvim')
+"   nmap <BS> <C-W>h
+" endif
 
       " \'win'  : ['#I',  '#(basename #{pane_current_path})'],
 let g:tmuxline_preset = {
