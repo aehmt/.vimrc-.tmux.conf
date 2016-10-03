@@ -3,7 +3,7 @@ scriptencoding utf-8
 "set encoding=utf-8
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, remove the outermost $TMUX check.
-   "For Neovim 0.1.3 and 0.1.4
+ "For Neovim 0.1.3 and 0.1.4
 
 "refreshes changes automatically
 " set autoread
@@ -17,6 +17,12 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 call vundle#begin('~/.vim/bundle/')
+
+"performance updates
+set synmaxcol=128
+set ttyfast " u got a fast terminal
+" set lazyredraw " to avoid scrolling problems
+
 
 if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -121,6 +127,10 @@ Plugin 'mattn/emmet-vim'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-rails'
 " Plugin 'tomasr/molokai'
+"
+"
+"enables dash.app in vim
+Plugin 'rizzatti/dash.vim'
 
 Plugin 'benmills/vimux'
 Plugin 'Lokaltog/vim-powerline'
@@ -225,19 +235,19 @@ endif
 " turn on this option as well
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
-"if has("autocmd")
-"  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-"endif
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
 " Uncomment the following to have Vim load indentation rules and plugins
 " according to the detected filetype.
-"if has("autocmd")
-"  filetype plugin indent on
-"endif
+if has("autocmd")
+  filetype plugin indent on
+endif
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
 "set showcmd    " Show (partial) command in status line.
 "set showmatch    " Show matching brackets.
-"set ignorecase   " Do case insensitive matching
+" set ignorecase   " Do case insensitive matching
 " set smartcase    " Do smart case matching
 "set incsearch    " Incremental search
 " set autowrite    " Automatically save before commands like :next and :make
@@ -421,7 +431,7 @@ let g:airline_theme = 'base16_londontube'
 
 "hi CursorLine	 cterm=NONE ctermbg=8 ctermfg=white
 "hi CursorLine term=bold cterm=bold guibg=Grey40
-"autocmd InsertEnter * highlight CursorLine guibg=#000050 guifg=fg
+  "autocmd InsertEnter * highlight CursorLine guibg=#000050 guifg=fg
 "autocmd InsertLeave * highlight CursorLine guibg=#004000 guifg=fg
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -429,9 +439,9 @@ let g:airline_theme = 'base16_londontube'
 "let g:indentLine_conceallevel = 0 "(default 2)
 
 "let g:indentLine_color_term = 15
-let g:indentLine_color_term = 48
-let g:indentLine_char ='┋'
-highlight Visual cterm=NONE ctermbg=178 ctermfg=NONE guibg=Grey40
+let g:indentLine_color_term = 8
+let g:indentLine_char ='│'
+highlight Visual cterm=NONE ctermbg=8 ctermfg=NONE guibg=Grey40
 "set listchars=tab:❯\  
 "set listchars=eol:↲ ┆¦┊
 "set listchars=tab:❯\ ,eol:↲ 
@@ -520,7 +530,8 @@ cnoremap … <ESC>
 nnoremap j gj
 nnoremap k gk
 "inoremap <Up> <ESC>kddpkA
-nnoremap <Up> kddpk
+" nnoremap <Up> kddpk
+nnoremap <Up> ddkP
 "inoremap <Down> <ESC>ddpA
 nnoremap <Down> ddp
 "nnoremap <Right> xp
@@ -601,6 +612,9 @@ imap <C-k> <up>
 imap <C-l> <right>
 nnoremap <C-z> a
 
+"python server localhost:8000
+nmap <leader>py :call VimuxRunCommand("python -m SimpleHTTPServer") <CR>
+
 "db/schema.rb
 nmap <leader>db :call VimuxRunCommand("cat db/schema.rb") <CR>
 
@@ -616,7 +630,7 @@ nmap <leader>r :call VimuxRunCommand(getline('.') ." ") <CR>
 vmap <leader>r :call VimuxRunCommand(getline('.') ." ") <CR>
 
 nmap <leader>t  :w \| call VimuxRunCommand("!!") <CR>
-nmap <leader>sg	:w \| call VimuxRunCommand("shotgun ") <CR>
+" nmap <leader>sg	:w \| call VimuxRunCommand("shotgun ") <CR>
 map  <Leader>f <Plug>(easymotion-bd-f)
 nmap <leader>S	:w \| call VimuxRunCommand("learn && learn submit") <CR>
 nmap <leader>lb	:w \| call VimuxRunCommand("learn -b") <CR>
