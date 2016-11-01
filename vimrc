@@ -107,7 +107,9 @@ else
   " Enable heavy omni completion.
   if !exists('g:neocomplete#sources#omni#input_patterns')
     let g:neocomplete#sources#omni#input_patterns = {}
+    let g:neocomplete#sources#syntax#min_keyword_length = 1
   endif
+  
   "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
   "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
   "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
@@ -119,6 +121,7 @@ else
   endif
   let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
   let g:neocomplete#force_omni_input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+  " let g:neocomplete#force_omni_input_patterns.ruby = '[^*\t]\w*\|\h\w*::'
 
 endif
 
@@ -129,9 +132,12 @@ Plugin 'tpope/vim-rails'
 " Plugin 'tomasr/molokai'
 "
 "
+"javascript Plugins
+
 "enables dash.app in vim
 Plugin 'rizzatti/dash.vim'
 
+Plugin 'jacoborus/tender'
 Plugin 'benmills/vimux'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'edkolev/tmuxline.vim'
@@ -141,7 +147,7 @@ Plugin 'othree/html5.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'majutsushi/tagbar'
 Plugin 'Yggdroot/indentLine'
-" Plugin 'vim-scripts/AutoComplPop'
+Plugin 'vim-scripts/AutoComplPop'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'edkolev/promptline.vim'
 " Plugin 'morhetz/gruvbox'
@@ -157,7 +163,7 @@ Plugin 'Shougo/neocomplete.vim'
 " Plugin 'Shougo/deoplete.nvim'
 Plugin 'ervandew/supertab'
 Plugin 'vim-ruby/vim-ruby'
-Plugin 'aehmt/tender.vim'
+" Plugin 'aehmt/tender.vim'
 " Plugin 'flazz/vim-colorschemes'
 " Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-airline/vim-airline'
@@ -185,6 +191,8 @@ Plugin 'honza/vim-snippets'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
+
+Plugin 'sheerun/vim-polyglot'
 ", { 'do': ':UpdateRemotePlugins' }
 " Plugin 'easymotion/vim-easymotion'
 " The following are examples of different formats supported.
@@ -271,8 +279,8 @@ set mouse=a    " Enable mouse usage (all modes)
 "
 "
 "
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#auto_complete_start_length=1
+" let g:deoplete#enable_at_startup = 1
+" let g:deoplete#auto_complete_start_length=1
 
 let g:snipMate = get(g:, 'snipMate', {}) " Allow for vimrc re-sourcing
 let g:snipMate.scope_aliases = {}
@@ -283,10 +291,9 @@ let g:snipMate.scope_aliases['ruby'] = 'ruby,rails'
 " autocmd FileType ruby compiler ruby
 
 
-
 " make YCM compatible with UltiSnips (using supertab)
 " let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-" let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
  
 " Enable snipMate compatibility feature.
@@ -310,16 +317,16 @@ let g:UltiSnipsEditSplit="vertical"
 "Plugin 'user/L9', {'name': 'newL9'}
 
 " All of your Plugins must be added before the following line
-call vundle#end()			 " required
-filetype plugin indent on	 " required
+call vundle#end()	" required
+filetype plugin indent on	" required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
 " Brief help
-" :PluginList		- lists configured plugins
+" :PluginList	- lists configured plugins
 " :PluginInstall	- installs plugins; append `!` to update or just :PluginUpdate
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean		- confirms removal of unused plugins; append `!` to auto-approve removal
+" :PluginClean	- confirms removal of unused plugins; append `!` to auto-approve removal
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
@@ -356,15 +363,15 @@ filetype plugin indent on	 " required
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
-"set showcmd		" Show (partial) command in status line.
-"set showmatch		" Show matching brackets.
-"set ignorecase		" Do case insensitive matching
-"set smartcase		" Do smart case matching
-"set incsearch		" Incremental search
-"set autowrite		" Automatically save before commands like :next and :make
-"set hidden		" Hide buffers when they are abandoned
+"set showcmd	" Show (partial) command in status line.
+"set showmatch	" Show matching brackets.
+"set ignorecase	" Do case insensitive matching
+"set smartcase	" Do smart case matching
+"set incsearch	" Incremental search
+"set autowrite	" Automatically save before commands like :next and :make
+"set hidden	" Hide buffers when they are abandoned
 " set hidden
-"set mouse=a		" Enable mouse usage (all modes)
+"set mouse=a	" Enable mouse usage (all modes)
 
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 0
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
@@ -403,12 +410,15 @@ set relativenumber
 "
 "
 syntax on
+syntax enable
 set cursorline
-colorscheme tender-contrast
+colorscheme tender
+" colorscheme tender-contrast
 " enable tender airline theme
 " let g:tender_airline = 1
 " set airline theme
-let g:airline_theme = 'base16_londontube'
+" let g:airline_theme = 'base16_londontube'
+let g:airline_theme = 'tender'
 " colorscheme melanite
 " let g:airline_theme='onehalfdark'
 " let g:airline_theme='onehalfdark'
@@ -429,7 +439,7 @@ let g:airline_theme = 'base16_londontube'
 " hi Comment  guifg=#80a0ff ctermfg=7
 
 
-"hi CursorLine	 cterm=NONE ctermbg=8 ctermfg=white
+"hi CursorLine	cterm=NONE ctermbg=8 ctermfg=white
 "hi CursorLine term=bold cterm=bold guibg=Grey40
   "autocmd InsertEnter * highlight CursorLine guibg=#000050 guifg=fg
 "autocmd InsertLeave * highlight CursorLine guibg=#004000 guifg=fg
@@ -539,17 +549,17 @@ nnoremap <Down> ddp
 nnoremap <CR> o<ESC>
 
 function! P_Compile()
-	let i =  expand('%:e')
-	if ( i == "rb" )
-		let c =  " ruby " .expand('%:p') 
-		return c
+let i =  expand('%:e')
+if ( i == "rb" )
+let c =  " ruby " .expand('%:p') 
+return c
   elseif ( i == 'js' )
     let c =  " node " .expand('%:p')
     return c
-	else
-		let c = " echo lol no compiler found "
-		return c
-	endif
+else
+let c = " echo lol no compiler found "
+return c
+endif
 endfunc
 nnoremap <leader>q :bp<cr>:bd #<cr>
 
@@ -574,9 +584,9 @@ autocmd VimEnter * NERDTree | wincmd p
 
 function! NumberToggle()
 if(&relativenumber == 1)
-	set relativenumber!
+set relativenumber!
   else
-	set relativenumber
+set relativenumber
   endif
 endfunc
 
@@ -600,7 +610,7 @@ nmap <leader>rf	:w \| call VimuxRunCommand("rspec --f-f") <CR>
 nmap <leader>rs	:w \| call VimuxRunCommand("rspec") <CR>
 nmap <leader>Q	:w \| call VimuxRunCommand("rspec " .expand('%:p:h'). "/../spec/*" .expand('%:t:r')."*") <CR>
 "nmap <leader>1q	:w \| call VimuxRunCommand(" rspec " .expand('%:p:h'). "/../spec/*" .expand('%:t:r')."* --f-f") <CR>
-nmap <leader>1s	:w \| call VimuxRunCommand("rspec" .expand('%:p'). ":".line('.')) <CR>
+nmap <leader>1s	:w \| call VimuxRunCommand("rspec " .expand('%:p'). ":".line('.')) <CR>
 
 "insert mode hjkl
 "run 2 commands below in terminal for nvim. for vim it's not neccessary
