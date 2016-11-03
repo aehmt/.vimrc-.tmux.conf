@@ -3,7 +3,7 @@ scriptencoding utf-8
 "set encoding=utf-8
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, remove the outermost $TMUX check.
- "For Neovim 0.1.3 and 0.1.4
+   "For Neovim 0.1.3 and 0.1.4
 
 "refreshes changes automatically
 " set autoread
@@ -11,18 +11,12 @@ scriptencoding utf-8
 
 "let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 " be iMproved, required
-filetype off " required
+filetype off " required 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 call vundle#begin('~/.vim/bundle/')
-
-"performance updates
-set synmaxcol=128
-set ttyfast " u got a fast terminal
-" set lazyredraw " to avoid scrolling problems
-
 
 if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -107,9 +101,7 @@ else
   " Enable heavy omni completion.
   if !exists('g:neocomplete#sources#omni#input_patterns')
     let g:neocomplete#sources#omni#input_patterns = {}
-    let g:neocomplete#sources#syntax#min_keyword_length = 1
   endif
-  
   "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
   "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
   "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
@@ -121,23 +113,23 @@ else
   endif
   let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
   let g:neocomplete#force_omni_input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-  " let g:neocomplete#force_omni_input_patterns.ruby = '[^*\t]\w*\|\h\w*::'
 
 endif
 
+Plugin 'vim-scripts/AutoComplPop'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'epilande/vim-react-snippets'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx' "allow jsx in normal JS files added let g:jsx...
+" Plugin 'ap/vim-css-color'
+
 Plugin 'mattn/emmet-vim'
 " Plugin 'vim-colors-solarized'
+Plugin 'jacoborus/tender'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-rails'
 " Plugin 'tomasr/molokai'
-"
-"
-"javascript Plugins
 
-"enables dash.app in vim
-Plugin 'rizzatti/dash.vim'
-
-Plugin 'jacoborus/tender'
 Plugin 'benmills/vimux'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'edkolev/tmuxline.vim'
@@ -147,14 +139,13 @@ Plugin 'othree/html5.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'majutsushi/tagbar'
 Plugin 'Yggdroot/indentLine'
-Plugin 'vim-scripts/AutoComplPop'
+" Plugin 'vim-scripts/AutoComplPop'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'edkolev/promptline.vim'
 " Plugin 'morhetz/gruvbox'
 " Plugin 'tyrannicaltoucan/vim-deep-space'
 "Plugin 'vim-scripts/Conque-Shell'
 Plugin 'vim-airline/vim-airline-themes'
-"
 "
 " Plugin 'valloric/youcompleteme'
 Plugin 'Shougo/neosnippet-snippets'
@@ -163,13 +154,14 @@ Plugin 'Shougo/neocomplete.vim'
 " Plugin 'Shougo/deoplete.nvim'
 Plugin 'ervandew/supertab'
 Plugin 'vim-ruby/vim-ruby'
-" Plugin 'aehmt/tender.vim'
 " Plugin 'flazz/vim-colorschemes'
 " Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-airline/vim-airline'
 " Plugin 'mhartington/oceanic-next'
 " Plugin 'bling/vim-bufferline'
 Plugin 'Raimondi/delimitMate'
+" Plugin 'jiangmiao/auto-pairs'
+
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-endwise'
 Plugin 'terryma/vim-smooth-scroll'
@@ -191,8 +183,6 @@ Plugin 'honza/vim-snippets'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
-
-Plugin 'sheerun/vim-polyglot'
 ", { 'do': ':UpdateRemotePlugins' }
 " Plugin 'easymotion/vim-easymotion'
 " The following are examples of different formats supported.
@@ -211,9 +201,9 @@ Plugin 'sheerun/vim-polyglot'
 "Plugin 'user/L9', {'name': 'newL9'}
 " All of your Plugins must be added before the following line
 call vundle#end()      " required
-filetype plugin indent on  " required
+" filetype plugin indent on 
 " To ignore plugin indent changes, instead use:
-"filetype plugin on
+filetype plugin on 
 
 func! vundle#end(...) abort
   if (exists("g:vundle_lazy_load"))
@@ -248,14 +238,14 @@ if has("autocmd")
 endif
 " Uncomment the following to have Vim load indentation rules and plugins
 " according to the detected filetype.
-if has("autocmd")
-  filetype plugin indent on
-endif
+"if has("autocmd")
+"  filetype plugin indent on
+"endif
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
 "set showcmd    " Show (partial) command in status line.
-"set showmatch    " Show matching brackets.
-" set ignorecase   " Do case insensitive matching
+" set showmatch    " Show matching brackets. 
+"set ignorecase   " Do case insensitive matching
 " set smartcase    " Do smart case matching
 "set incsearch    " Incremental search
 " set autowrite    " Automatically save before commands like :next and :make
@@ -275,12 +265,16 @@ set mouse=a    " Enable mouse usage (all modes)
 " let g:snipMate.scope_aliases = {}
 " let g:snipMate.scope_aliases['ruby'] = 'ruby,ruby-rails,ruby-1.9'
 "
-"
-"
-"
-"
-" let g:deoplete#enable_at_startup = 1
-" let g:deoplete#auto_complete_start_length=1
+let g:delimitMate_expand_space = 1
+let g:delimitMate_expand_cr = 1
+let g:delimitMate_jump_expansion = 1
+let g:delimitMate_balance_matchpairs = 1
+" set autoindent
+" set smartindent
+inoremap {<CR> {<CR>}<C-o>O<TAB>
+
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_complete_start_length=1
 
 let g:snipMate = get(g:, 'snipMate', {}) " Allow for vimrc re-sourcing
 let g:snipMate.scope_aliases = {}
@@ -291,9 +285,10 @@ let g:snipMate.scope_aliases['ruby'] = 'ruby,rails'
 " autocmd FileType ruby compiler ruby
 
 
+
 " make YCM compatible with UltiSnips (using supertab)
 " let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+" let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
  
 " Enable snipMate compatibility feature.
@@ -316,22 +311,6 @@ let g:UltiSnipsEditSplit="vertical"
 " Avoid a name conflict with L9
 "Plugin 'user/L9', {'name': 'newL9'}
 
-" All of your Plugins must be added before the following line
-call vundle#end()	" required
-filetype plugin indent on	" required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList	- lists configured plugins
-" :PluginInstall	- installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean	- confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
-
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -340,38 +319,11 @@ filetype plugin indent on	" required
 " options, so any other options should be set AFTER setting 'compatible'.
 "set compatible
 
-" Vim5 and later versions support syntax highlighting. Uncommenting the next
-" line enables syntax highlighting by default.
-" if has("syntax")
-"   syntax on
-" endif
 
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
 
-" Uncomment the following to have Vim jump to the last position when
-" reopening a file
-"if has("autocmd")
-"  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-"endif
-
-" Uncomment the following to have Vim load indentation rules and plugins
-" according to the detected filetype.
-"if has("autocmd")
-"  filetype plugin indent on
-"endif
-
-" The following are commented out as they cause vim to behave a lot
-" differently from regular Vi. They are highly recommended though.
-"set showcmd	" Show (partial) command in status line.
-"set showmatch	" Show matching brackets.
-"set ignorecase	" Do case insensitive matching
-"set smartcase	" Do smart case matching
-"set incsearch	" Incremental search
-"set autowrite	" Automatically save before commands like :next and :make
-"set hidden	" Hide buffers when they are abandoned
-" set hidden
-"set mouse=a	" Enable mouse usage (all modes)
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 0
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
@@ -409,16 +361,13 @@ set relativenumber
 " colorscheme onehalflight
 "
 "
-syntax on
-syntax enable
+" syntax on
 set cursorline
 colorscheme tender
-" colorscheme tender-contrast
 " enable tender airline theme
 " let g:tender_airline = 1
 " set airline theme
-" let g:airline_theme = 'base16_londontube'
-let g:airline_theme = 'tender'
+let g:airline_theme = 'base16_londontube'
 " colorscheme melanite
 " let g:airline_theme='onehalfdark'
 " let g:airline_theme='onehalfdark'
@@ -439,9 +388,9 @@ let g:airline_theme = 'tender'
 " hi Comment  guifg=#80a0ff ctermfg=7
 
 
-"hi CursorLine	cterm=NONE ctermbg=8 ctermfg=white
+"hi CursorLine	 cterm=NONE ctermbg=8 ctermfg=white
 "hi CursorLine term=bold cterm=bold guibg=Grey40
-  "autocmd InsertEnter * highlight CursorLine guibg=#000050 guifg=fg
+"autocmd InsertEnter * highlight CursorLine guibg=#000050 guifg=fg
 "autocmd InsertLeave * highlight CursorLine guibg=#004000 guifg=fg
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -458,7 +407,7 @@ highlight Visual cterm=NONE ctermbg=8 ctermfg=NONE guibg=Grey40
 "set listchars=tab:⇁\ ,eol:┘
 
 
-"set autoindent
+" set autoindent
 set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 "set tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
 "set tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
@@ -540,8 +489,7 @@ cnoremap … <ESC>
 nnoremap j gj
 nnoremap k gk
 "inoremap <Up> <ESC>kddpkA
-" nnoremap <Up> kddpk
-nnoremap <Up> ddkP
+nnoremap <Up> kddpk
 "inoremap <Down> <ESC>ddpA
 nnoremap <Down> ddp
 "nnoremap <Right> xp
@@ -549,17 +497,17 @@ nnoremap <Down> ddp
 nnoremap <CR> o<ESC>
 
 function! P_Compile()
-let i =  expand('%:e')
-if ( i == "rb" )
-let c =  " ruby " .expand('%:p') 
-return c
+	let i =  expand('%:e')
+	if ( i == "rb" )
+		let c =  " ruby " .expand('%:p') 
+		return c
   elseif ( i == 'js' )
     let c =  " node " .expand('%:p')
     return c
-else
-let c = " echo lol no compiler found "
-return c
-endif
+	else
+		let c = " echo lol no compiler found "
+		return c
+	endif
 endfunc
 nnoremap <leader>q :bp<cr>:bd #<cr>
 
@@ -584,9 +532,9 @@ autocmd VimEnter * NERDTree | wincmd p
 
 function! NumberToggle()
 if(&relativenumber == 1)
-set relativenumber!
+	set relativenumber!
   else
-set relativenumber
+	set relativenumber
   endif
 endfunc
 
@@ -610,7 +558,7 @@ nmap <leader>rf	:w \| call VimuxRunCommand("rspec --f-f") <CR>
 nmap <leader>rs	:w \| call VimuxRunCommand("rspec") <CR>
 nmap <leader>Q	:w \| call VimuxRunCommand("rspec " .expand('%:p:h'). "/../spec/*" .expand('%:t:r')."*") <CR>
 "nmap <leader>1q	:w \| call VimuxRunCommand(" rspec " .expand('%:p:h'). "/../spec/*" .expand('%:t:r')."* --f-f") <CR>
-nmap <leader>1s	:w \| call VimuxRunCommand("rspec " .expand('%:p'). ":".line('.')) <CR>
+nmap <leader>1s	:w \| call VimuxRunCommand("rspec" .expand('%:p'). ":".line('.')) <CR>
 
 "insert mode hjkl
 "run 2 commands below in terminal for nvim. for vim it's not neccessary
@@ -640,7 +588,7 @@ nmap <leader>r :call VimuxRunCommand(getline('.') ." ") <CR>
 vmap <leader>r :call VimuxRunCommand(getline('.') ." ") <CR>
 
 nmap <leader>t  :w \| call VimuxRunCommand("!!") <CR>
-" nmap <leader>sg	:w \| call VimuxRunCommand("shotgun ") <CR>
+nmap <leader>npm	:w \| call VimuxRunCommand("npm run bundle ") <CR>
 map  <Leader>f <Plug>(easymotion-bd-f)
 nmap <leader>S	:w \| call VimuxRunCommand("learn && learn submit") <CR>
 nmap <leader>lb	:w \| call VimuxRunCommand("learn -b") <CR>
