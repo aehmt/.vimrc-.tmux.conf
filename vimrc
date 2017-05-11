@@ -37,32 +37,32 @@ else
     " set t_AB=^[[48;5;%dm
     " set t_AF=^[[38;5;%dm
   " endif
+" //////
+  " let g:neocomplete#enable_at_startup = 1
+  " " Use smartcase.
+  " let g:neocomplete#enable_smart_case = 1
+  " " Set minimum syntax keyword length.
+  " " let g:neocomplete#sources#syntax#min_keyword_length = 3
+  " let g:neocomplete#sources#syntax#min_keyword_length = 2
+  " let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
-  let g:neocomplete#enable_at_startup = 1
-  " Use smartcase.
-  let g:neocomplete#enable_smart_case = 1
-  " Set minimum syntax keyword length.
-  " let g:neocomplete#sources#syntax#min_keyword_length = 3
-  let g:neocomplete#sources#syntax#min_keyword_length = 2
-  let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+  " " Define dictionary.
+  " let g:neocomplete#sources#dictionary#dictionaries = {
+  "     \ 'default' : '',
+  "     \ 'vimshell' : $HOME.'/.vimshell_hist',
+  "     \ 'scheme' : $HOME.'/.gosh_completions'
+  " \ }
 
-  " Define dictionary.
-  let g:neocomplete#sources#dictionary#dictionaries = {
-      \ 'default' : '',
-      \ 'vimshell' : $HOME.'/.vimshell_hist',
-      \ 'scheme' : $HOME.'/.gosh_completions'
-  \ }
+  " " Define keyword.
+  " if !exists('g:neocomplete#keyword_patterns')
+  "     let g:neocomplete#keyword_patterns = {}
+  " endif
+  " let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+" //////commented out
 
-  " Define keyword.
-  if !exists('g:neocomplete#keyword_patterns')
-      let g:neocomplete#keyword_patterns = {}
-  endif
-  let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-
-  " Plugin key-mappings.
-  inoremap <expr><C-g>     neocomplete#undo_completion()
-  inoremap <expr><C-l>     neocomplete#complete_common_string()
+  " " Plugin key-mappings.
+  " inoremap <expr><C-g>     neocomplete#undo_completion()
+  " inoremap <expr><C-l>     neocomplete#complete_common_string()
 
   " " Recommended key-mappings.
   " " <CR>: close popup and save indent.
@@ -116,7 +116,7 @@ else
 
 endif
 
-Plugin 'vim-scripts/AutoComplPop'
+" Plugin 'vim-scripts/AutoComplPop'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'epilande/vim-react-snippets'
 Plugin 'pangloss/vim-javascript'
@@ -129,6 +129,8 @@ Plugin 'jacoborus/tender'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'tpope/vim-rails'
 " Plugin 'tomasr/molokai'
+"
+Plugin 'mhinz/vim-startify' "remember state of the vim
 
 Plugin 'benmills/vimux'
 Plugin 'Lokaltog/vim-powerline'
@@ -183,6 +185,7 @@ Plugin 'honza/vim-snippets'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
+Plugin 'rking/ag.vim'
 ", { 'do': ':UpdateRemotePlugins' }
 " Plugin 'easymotion/vim-easymotion'
 " The following are examples of different formats supported.
@@ -257,6 +260,7 @@ set mouse=a    " Enable mouse usage (all modes)
 """""""""""""""""""""FOR eruby.vim"""""""""""""""""""""
 "let b:surround_{char2nr('=')} = "<%= \r %>"
 "let b:surround_{char2nr('-')} = "<% \r %>"
+let g:surround_116 = "{/* \r\ */}"
 """""""""""""""""""""FOR eruby.vim"""""""""""""""""""""
 """""""""""""""rvm implode, then reinstall jekyll with gem install jekyll
 "let mapleader = ","
@@ -328,6 +332,7 @@ let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 0
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+autocmd FileType javascript UltiSnipsAddFiletypes html 
 autocmd FileType ruby compiler ruby
 set omnifunc=syntaxcomplete#Complete
 set laststatus=2
@@ -337,7 +342,7 @@ set laststatus=2
 "
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:closetag_filenames = "*.erb,*.html.erb,*.html,*.xhtml,*.phtml"
+let g:closetag_filenames = "*.erb,*.html.erb,*.html,*.xhtml,*.phtml,*.js"
 "let g:Powerline_symbols = 'fancy'
 set number
 set relativenumber
@@ -361,13 +366,13 @@ set relativenumber
 " colorscheme onehalflight
 "
 "
-" syntax on
+syntax on
 set cursorline
 colorscheme tender
 " enable tender airline theme
 " let g:tender_airline = 1
 " set airline theme
-let g:airline_theme = 'base16_londontube'
+" let g:airline_theme = 'base16_londontube'
 " colorscheme melanite
 " let g:airline_theme='onehalfdark'
 " let g:airline_theme='onehalfdark'
@@ -504,6 +509,9 @@ function! P_Compile()
   elseif ( i == 'js' )
     let c =  " node " .expand('%:p')
     return c
+  elseif ( i == 'py' )
+    let c =  " python " .expand('%:p')
+    return c
 	else
 		let c = " echo lol no compiler found "
 		return c
@@ -514,6 +522,15 @@ nnoremap <leader>q :bp<cr>:bd #<cr>
 let g:NERDTreeWinSize = 25
 " hi Directory guifg=#82a2f0 ctermfg=red
 
+"ctrlp settings
+" let g:ctrlp_map='<c-p>'
+" let g:ctrlp_cmd = 'CtrlPMRU'
+let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_max_files=0
+" let g:ctrlp_max_depth=40
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+" let g:ctrlp_cmd='CtrlP :pwd'
 
 "close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
