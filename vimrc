@@ -1,5 +1,6 @@
 set nocompatible
 scriptencoding utf-8
+call plug#begin('~/.vim/plugged')
 "set encoding=utf-8
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, remove the outermost $TMUX check.
@@ -13,14 +14,14 @@ scriptencoding utf-8
 " be iMproved, required
 filetype off " required 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-call vundle#begin('~/.vim/bundle/')
+" set rtp+=~/.vim/bundle/Vundle.vim
+" call vundle#begin()
+" " alternatively, pass a path where Vundle should install plugins
+" call vundle#begin('~/.vim/bundle/')
 
 if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  Plugin 'Shougo/deoplete.nvim'
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
   "remember where you come from, VIM
   " if $TERM_PROGRAM ==# 'iTerm.app'
@@ -117,75 +118,75 @@ else
 endif
 
 " Plugin 'vim-scripts/AutoComplPop'
-Plugin 'sheerun/vim-polyglot'
-Plugin 'epilande/vim-react-snippets'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx' "allow jsx in normal JS files added let g:jsx...
+Plug 'sheerun/vim-polyglot'
+Plug 'epilande/vim-react-snippets'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx' "allow jsx in normal JS files added let g:jsx...
 " Plugin 'ap/vim-css-color'
 
-Plugin 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim'
 " Plugin 'vim-colors-solarized'
-Plugin 'jacoborus/tender'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'tpope/vim-rails'
+Plug 'jacoborus/tender'
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-rails'
 " Plugin 'tomasr/molokai'
 "
-Plugin 'mhinz/vim-startify' "remember state of the vim
+Plug 'mhinz/vim-startify' "remember state of the vim
 
-Plugin 'benmills/vimux'
-Plugin 'Lokaltog/vim-powerline'
-Plugin 'edkolev/tmuxline.vim'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'othree/html5.vim'
-Plugin 'godlygeek/tabular'
-Plugin 'majutsushi/tagbar'
-Plugin 'Yggdroot/indentLine'
+Plug 'benmills/vimux'
+Plug 'Lokaltog/vim-powerline'
+Plug 'edkolev/tmuxline.vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'othree/html5.vim'
+Plug 'godlygeek/tabular'
+Plug 'majutsushi/tagbar'
+Plug 'Yggdroot/indentLine'
 " Plugin 'vim-scripts/AutoComplPop'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'edkolev/promptline.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'edkolev/promptline.vim'
 " Plugin 'morhetz/gruvbox'
 " Plugin 'tyrannicaltoucan/vim-deep-space'
 "Plugin 'vim-scripts/Conque-Shell'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline-themes'
 "
 " Plugin 'valloric/youcompleteme'
-Plugin 'Shougo/neosnippet-snippets'
-Plugin 'Shougo/neosnippet.vim'
-Plugin 'Shougo/neocomplete.vim'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neocomplete.vim'
 " Plugin 'Shougo/deoplete.nvim'
-Plugin 'ervandew/supertab'
-Plugin 'vim-ruby/vim-ruby'
+Plug 'ervandew/supertab'
+Plug 'vim-ruby/vim-ruby'
 " Plugin 'flazz/vim-colorschemes'
 " Plugin 'vim-airline/vim-airline-themes'
-Plugin 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline'
 " Plugin 'mhartington/oceanic-next'
 " Plugin 'bling/vim-bufferline'
-Plugin 'Raimondi/delimitMate'
+Plug 'Raimondi/delimitMate'
 " Plugin 'jiangmiao/auto-pairs'
 
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'tpope/vim-endwise'
-Plugin 'terryma/vim-smooth-scroll'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-endwise'
+Plug 'terryma/vim-smooth-scroll'
 " Plugin 'terryma/vim-multiple-cursors'
 " Plugin 'qpkorr/vim-bufkill'
 " let Vundle manage Vundle, required
-Plugin 'tpope/vim-commentary'
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'scrooloose/nerdtree'
+Plug 'tpope/vim-commentary'
+Plug 'VundleVim/Vundle.vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'scrooloose/nerdtree'
 "Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'scrooloose/Syntastic'
-Plugin 'vim-scripts/Vim-R-plugin'
+Plug 'scrooloose/Syntastic'
+Plug 'vim-scripts/Vim-R-plugin'
 " Track the engine.
 " Track the engine.
-Plugin 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-Plugin 'rking/ag.vim'
+Plug 'honza/vim-snippets'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+Plug 'rking/ag.vim'
 ", { 'do': ':UpdateRemotePlugins' }
 " Plugin 'easymotion/vim-easymotion'
 " The following are examples of different formats supported.
@@ -203,17 +204,18 @@ Plugin 'rking/ag.vim'
 " Avoid a name conflict with L9
 "Plugin 'user/L9', {'name': 'newL9'}
 " All of your Plugins must be added before the following line
-call vundle#end()      " required
+" call vundle#end()      " required
+call plug#end()
 " filetype plugin indent on 
 " To ignore plugin indent changes, instead use:
-filetype plugin on 
+" filetype plugin on 
 
-func! vundle#end(...) abort
-  if (exists("g:vundle_lazy_load"))
-    unlet g:vundle_lazy_load
-  endif
-  call vundle#config#activate_bundles()
-endf
+" func! vundle#end(...) abort
+"   if (exists("g:vundle_lazy_load"))
+"     unlet g:vundle_lazy_load
+"   endif
+"   call vundle#config#activate_bundles()
+" endf
 "" Brief help
 " :PluginList   - lists configured plugins
 " :PluginInstall  - installs plugins; append `!` to update or just :PluginUpdate
@@ -547,6 +549,10 @@ autocmd FileType nerdtree cnoreabbrev <buffer> bd <nop>
 
 autocmd VimEnter * NERDTree | wincmd p
 
+set synmaxcol=200
+set ttyfast " u got a fast terminal
+set lazyredraw " to avoid scrolling problems
+
 function! NumberToggle()
 if(&relativenumber == 1)
 	set relativenumber!
@@ -587,6 +593,9 @@ imap <C-k> <up>
 imap <C-l> <right>
 nnoremap <C-z> a
 
+"accidential ;w saves
+imap ;w <ESC>:w<CR>
+
 "python server localhost:8000
 nmap <leader>py :call VimuxRunCommand("python -m SimpleHTTPServer") <CR>
 
@@ -596,6 +605,10 @@ nmap <leader>db :call VimuxRunCommand("cat db/schema.rb") <CR>
 "rake routes
 nmap <leader>rr :call VimuxRunCommand("rake routes") <CR>
 nmap <leader>et :call VimuxRunCommand("rake db:migrate RAILS_ENV=test") <CR>
+
+"something related to autocompleation
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+inoremap <expr><S-tab> pumvisible() ? "\<c-p>" : "\<S-tab>"
 
 "Pry commands"
 nmap <leader>pry :call VimuxRunCommand("pry") <CR>
@@ -623,8 +636,8 @@ endif
 
       " \'win'  : ['#I',  '#(basename #{pane_current_path})'],
 let g:tmuxline_preset = {
-      \'a'    : '#S',
-      \'win'  : ['#I',  '#W'],
-      \'cwin' : ['#I', '#(basename #{pane_current_path})', '#F'],
-      \'y'    : ['%R', '%a', '%Y'],
-      \'z'    : '#H'}
+      \'a'    : '#(whoami)',
+      \'win'  : ['#I', '#W'],
+      \'cwin' : ['#I', '#W '],
+      \'y'    : ['%A', '%H:%M', '%Y-%m-%d'],
+      \'z'    : '#h'}
