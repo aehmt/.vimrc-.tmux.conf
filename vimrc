@@ -5,7 +5,6 @@ call plug#begin('~/.vim/plugged')
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, remove the outermost $TMUX check.
    "For Neovim 0.1.3 and 0.1.4
-
 "refreshes changes automatically
 " set autoread
 " au CursorHold,CursorHoldI * checktime
@@ -122,7 +121,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'epilande/vim-react-snippets'
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx' "allow jsx in normal JS files added let g:jsx...
-" Plugin 'ap/vim-css-color'
+Plug 'ap/vim-css-color'
 
 Plug 'mattn/emmet-vim'
 " Plugin 'vim-colors-solarized'
@@ -155,7 +154,7 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neocomplete.vim'
 " Plugin 'Shougo/deoplete.nvim'
-Plug 'ervandew/supertab'
+" Plug 'ervandew/supertab'
 Plug 'vim-ruby/vim-ruby'
 " Plugin 'flazz/vim-colorschemes'
 " Plugin 'vim-airline/vim-airline-themes'
@@ -165,17 +164,21 @@ Plug 'vim-airline/vim-airline'
 Plug 'Raimondi/delimitMate'
 " Plugin 'jiangmiao/auto-pairs'
 
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-endwise'
-Plug 'terryma/vim-smooth-scroll'
+" Plug 'terryma/vim-smooth-scroll'
 " Plugin 'terryma/vim-multiple-cursors'
 " Plugin 'qpkorr/vim-bufkill'
 " let Vundle manage Vundle, required
 Plug 'tpope/vim-commentary'
 Plug 'VundleVim/Vundle.vim'
 Plug 'christoomey/vim-tmux-navigator'
+
+" Plug 'tpope/vim-vinegar'
 Plug 'scrooloose/nerdtree'
-"Plugin 'jistr/vim-nerdtree-tabs'
+
+" Plugin 'jistr/vim-nerdtree-tabs'
 Plug 'scrooloose/Syntastic'
 Plug 'vim-scripts/Vim-R-plugin'
 " Track the engine.
@@ -389,7 +392,6 @@ colorscheme tender
 "hi Normal ctermbg=none
 "hi Normal ctermbg=none
 
-"set cursorline
 " hi CursorLine cterm=bold ctermbg=8 ctermfg=NONE
 
 " hi Comment  guifg=#80a0ff ctermfg=7
@@ -524,23 +526,28 @@ nnoremap <leader>q :bp<cr>:bd #<cr>
 let g:NERDTreeWinSize = 25
 " hi Directory guifg=#82a2f0 ctermfg=red
 
-"ctrlp settings
-" let g:ctrlp_map='<c-p>'
-" let g:ctrlp_cmd = 'CtrlPMRU'
-let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_max_files=0
-" let g:ctrlp_max_depth=40
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-" let g:ctrlp_cmd='CtrlP :pwd'
+" "ctrlp settings
+" " let g:ctrlp_map='<c-p>'
+" " let g:ctrlp_cmd = 'CtrlPMRU'
+" let g:ctrlp_cmd = 'CtrlPMixed'
+" let g:ctrlp_max_files=0
+" " let g:ctrlp_max_depth=40
+" let g:ctrlp_working_path_mode = 'ra'
+" let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+" " let g:ctrlp_cmd='CtrlP :pwd'
+
+"fzf settings
+nnoremap <C-[> :FZF<CR>
+nnoremap <C-p> :GFiles<CR>
 
 "close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 "open a NERDTree automatically when vim starts up 
-"autocmd vimenter * NERDTree
+autocmd vimenter * NERDTree
 "
 " open a NERDTree automatically when vim starts up if no files were specified
+" """""""
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
@@ -548,10 +555,13 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd FileType nerdtree cnoreabbrev <buffer> bd <nop>
 
 autocmd VimEnter * NERDTree | wincmd p
+" """"""" nerdtree commented out
+"
 
-set synmaxcol=200
-set ttyfast " u got a fast terminal
-set lazyredraw " to avoid scrolling problems
+" set synmaxcol=128
+" syntax sync minlines=256
+" set ttyfast " u got a fast terminal
+" set lazyredraw " to avoid scrolling problems
 
 function! NumberToggle()
 if(&relativenumber == 1)
@@ -563,10 +573,10 @@ endfunc
 
 "Smooth scrool
 "let me see the plugin on google chrome
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
-noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
-noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+" noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+" noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+" noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+" noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
 
 
 "nnoremap ø <CR> <c-w>h
