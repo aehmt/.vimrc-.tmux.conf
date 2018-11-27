@@ -164,6 +164,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'Raimondi/delimitMate'
 " Plugin 'jiangmiao/auto-pairs'
 
+Plug 'styled-components/vim-styled-components' "styled components plugin
 " Plug 'ctrlpvim/ctrlp.vim'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-endwise'
