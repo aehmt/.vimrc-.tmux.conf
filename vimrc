@@ -11,7 +11,7 @@ call plug#begin('~/.vim/plugged')
 
 "let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 " be iMproved, required
-filetype off " required 
+filetype off " required
 " set the runtime path to include Vundle and initialize
 " set rtp+=~/.vim/bundle/Vundle.vim
 " call vundle#begin()
@@ -116,6 +116,8 @@ else
 
 endif
 
+Plug 'w0rp/ale' "Asynchronous linting/fixing for Vim
+
 " Plugin 'vim-scripts/AutoComplPop'
 Plug 'sheerun/vim-polyglot'
 Plug 'epilande/vim-react-snippets'
@@ -161,12 +163,13 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'vim-airline/vim-airline'
 " Plugin 'mhartington/oceanic-next'
 " Plugin 'bling/vim-bufferline'
-Plug 'Raimondi/delimitMate'
+Plug 'Raimondi/delimitMate' "auto closing quotes, parenthesis, brackets etc
 " Plugin 'jiangmiao/auto-pairs'
 
-Plug 'styled-components/vim-styled-components' "styled components plugin
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 " Plug 'ctrlpvim/ctrlp.vim'
-Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-endwise'
 " Plug 'terryma/vim-smooth-scroll'
 " Plugin 'terryma/vim-multiple-cursors'
@@ -178,9 +181,9 @@ Plug 'christoomey/vim-tmux-navigator'
 
 " Plug 'tpope/vim-vinegar'
 Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/Syntastic'
 
 " Plugin 'jistr/vim-nerdtree-tabs'
-Plug 'scrooloose/Syntastic'
 Plug 'vim-scripts/Vim-R-plugin'
 " Track the engine.
 " Track the engine.
@@ -210,9 +213,9 @@ Plug 'rking/ag.vim'
 " All of your Plugins must be added before the following line
 " call vundle#end()      " required
 call plug#end()
-" filetype plugin indent on 
+" filetype plugin indent on
 " To ignore plugin indent changes, instead use:
-" filetype plugin on 
+" filetype plugin on
 
 " func! vundle#end(...) abort
 "   if (exists("g:vundle_lazy_load"))
@@ -245,6 +248,7 @@ endif
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
+
 " Uncomment the following to have Vim load indentation rules and plugins
 " according to the detected filetype.
 "if has("autocmd")
@@ -253,7 +257,7 @@ endif
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
 "set showcmd    " Show (partial) command in status line.
-" set showmatch    " Show matching brackets. 
+" set showmatch    " Show matching brackets.
 "set ignorecase   " Do case insensitive matching
 " set smartcase    " Do smart case matching
 "set incsearch    " Incremental search
@@ -300,7 +304,7 @@ let g:snipMate.scope_aliases['ruby'] = 'ruby,rails'
 " let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 " let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
- 
+
 " Enable snipMate compatibility feature.
 let g:neosnippet#enable_snipmate_compatibility = 1
 
@@ -321,9 +325,21 @@ let g:UltiSnipsEditSplit="vertical"
 " Avoid a name conflict with L9
 "Plugin 'user/L9', {'name': 'newL9'}
 
+" w0rp/ale settings
+let g:ale_completion_enabled = 1
+let g:ale_enabled = 1
+let g:ale_fix_on_save = 1
+let g:ale_lint_on_save = 1
+let g:airline#extensions#ale#enabled = 1
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint', 'prettier'],
+\}
+let g:ale_linter_aliases = {'jsx': ['css', 'javascript']}
+let g:ale_linters = {'javascript': ['eslint', 'prettier', 'jshint']}
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"syntastic settings
+"
 " Uncomment the next line to make Vim more Vi-compatible
 " NOTE: debian.vim sets 'nocompatible'.  Setting 'compatible' changes numerous
 " options, so any other options should be set AFTER setting 'compatible'.
@@ -338,7 +354,7 @@ let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 0
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-autocmd FileType javascript UltiSnipsAddFiletypes html 
+autocmd FileType javascript UltiSnipsAddFiletypes html
 autocmd FileType ruby compiler ruby
 set omnifunc=syntaxcomplete#Complete
 set laststatus=2
@@ -411,9 +427,9 @@ colorscheme tender
 let g:indentLine_color_term = 8
 let g:indentLine_char ='│'
 highlight Visual cterm=NONE ctermbg=8 ctermfg=NONE guibg=Grey40
-"set listchars=tab:❯\  
+"set listchars=tab:❯\
 "set listchars=eol:↲ ┆¦┊
-"set listchars=tab:❯\ ,eol:↲ 
+"set listchars=tab:❯\ ,eol:↲
 "set listchars=tab:⇁\ ,eol:┘
 
 
@@ -423,7 +439,7 @@ set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 "set tabstop=4 shiftwidth=4 softtabstop=4 noexpandtab
 "set tabstop=4
 "set shiftwidth=4
-"set softtabstop=4 noexpandtab 
+"set softtabstop=4 noexpandtab
 "retab!
 
 "set list
@@ -436,7 +452,7 @@ set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "«»※↞↲↽⇙Γ
 "┘⇁↵↸⇙
-"set showbreak=↪\ 
+"set showbreak=↪\
 "set listchars=tab:→\ ,eol:↲ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 """""""""""""""""""""""""""""""""""""""""""
 ":so $VIMRUNTIME/syntax/hitest.vim
@@ -509,7 +525,7 @@ nnoremap <CR> o<ESC>
 function! P_Compile()
 	let i =  expand('%:e')
 	if ( i == "rb" )
-		let c =  " ruby " .expand('%:p') 
+		let c =  " ruby " .expand('%:p')
 		return c
   elseif ( i == 'js' )
     let c =  " node " .expand('%:p')
@@ -544,7 +560,7 @@ nnoremap <C-p> :GFiles<CR>
 "close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-"open a NERDTree automatically when vim starts up 
+"open a NERDTree automatically when vim starts up
 autocmd vimenter * NERDTree
 "
 " open a NERDTree automatically when vim starts up if no files were specified
