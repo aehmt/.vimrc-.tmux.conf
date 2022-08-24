@@ -18,14 +18,13 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  } " markdown preview package
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'w0rp/ale' "Asynchronous linting/fixing for Vim
 Plug 'sheerun/vim-polyglot'
-Plug 'epilande/vim-react-snippets'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx' "allow jsx in normal JS files added let g:jsx...
+" Plug 'epilande/vim-react-snippets'
+" Plug 'pangloss/vim-javascript'
+" Plug 'mxw/vim-jsx' "allow jsx in normal JS files added let g:jsx...
 Plug 'ap/vim-css-color'
 Plug 'jacoborus/tender'
-Plug 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion' "leader f to find chars
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
@@ -35,15 +34,13 @@ Plug 'Lokaltog/vim-powerline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'othree/html5.vim'
+" Plug 'othree/html5.vim'
 Plug 'godlygeek/tabular'
 Plug 'majutsushi/tagbar'
 Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
 Plug 'edkolev/promptline.vim'
 Plug 'vim-airline/vim-airline-themes'
-" Plug 'Shougo/neosnippet-snippets'
-" Plug 'Shougo/neosnippet.vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-airline/vim-airline'
 Plug 'Raimondi/delimitMate' "auto closing quotes, parenthesis, brackets etc
@@ -53,12 +50,12 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/Syntastic'
 Plug 'vim-scripts/Vim-R-plugin'
-Plug 'honza/vim-snippets'
+" Plug 'honza/vim-snippets'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'rking/ag.vim'
 call plug#end()
-let g:coc_global_extensions=[ 'coc-lists', 'coc-emmet', 'coc-calc', 'coc-tsserver', 'coc-snippets', 'coc-html', 'coc-css', 'coc-json', 'coc-prettier', 'coc-python']
+let g:coc_global_extensions=[ 'coc-lists', 'coc-emmet', 'coc-calc', 'coc-tsserver', 'coc-snippets', 'coc-html', 'coc-css', 'coc-json', 'coc-eslint'] " 'coc-prettier', 'coc-python']
 autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
   \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif
 autocmd FileType json syntax match Comment +\/\/.\+$+
@@ -72,6 +69,8 @@ augroup mygroup
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 " Use <C-j> for both expand and jump (make expand higher priority.)
+" Javashit
+nnoremap <leader>v :call CocAction("doHover")<cr>
 " imap <C-j> <Plug>(coc-snippets-expand-jump)
 snoremap <C-j> <space>
 vnoremap <C-j> <space>
@@ -140,17 +139,6 @@ let g:snipMate.scope_aliases = {}
 let g:snipMate.scope_aliases['ruby'] = 'ruby,rails'
 let g:neosnippet#enable_snipmate_compatibility = 1
 let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
-let g:ale_completion_enabled = 1
-let g:ale_enabled = 1
-let g:ale_fix_on_save = 1
-" let g:ale_lint_on_save = 1
-let g:airline#extensions#ale#enabled = 1
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': [ 'prettier'],
-\}
-let g:ale_linter_aliases = {'jsx': ['css', 'javascript']}
-let g:ale_linters = {'javascript': [ 'prettier', 'jshint']}
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 set laststatus=2
 let g:airline_powerline_fonts = 1
@@ -244,7 +232,8 @@ nmap <leader>e :call VimuxRunCommand("exit") <CR>
 nmap <leader>ee :call VimuxRunCommand("exit! ") <CR>
 nmap <leader>r :call VimuxRunCommand(getline('.') ." ") <CR>
 vmap <leader>r :call VimuxRunCommand(getline('.') ." ") <CR>
-nmap <leader>t  :w \| call VimuxRunCommand("!!") <CR>
+nmap <leader>t  :w \| call VimuxRunCommand("!!") \| call VimuxSendKeys('enter') <CR>
+nmap <Leader>cc :call VimuxInterruptRunner()<CR>
 nmap <leader>npm  :w \| call VimuxRunCommand("npm run bundle ") <CR>
 map  <Leader>f <Plug>(easymotion-bd-f)
 if filereadable("/etc/vim/vimrc.local")
