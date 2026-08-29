@@ -96,6 +96,7 @@ autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
   \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif
 autocmd FileType json syntax match Comment +\/\/.\+$+
 autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd BufWritePre *.ts,*.tsx,*.js,*.jsx silent call CocAction('runCommand', 'eslint.executeAutofix')
 
 augroup mygroup
   autocmd!
