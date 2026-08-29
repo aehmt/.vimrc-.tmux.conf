@@ -155,7 +155,7 @@ highlight Visual cterm=NONE ctermbg=8 ctermfg=NONE guibg=Grey40
 " Airline — only load the extensions we actually use
 let g:airline_powerline_fonts = 1
 let g:airline_highlighting_cache = 1
-let g:airline_extensions = ['tabline', 'coc', 'gitgutter']
+let g:airline_extensions = ['tabline', 'branch', 'coc', 'gitgutter']
 let g:airline#extensions#tabline#enabled = 1
 function! AirlineInit()
   let g:airline_section_a = airline#section#create([])
@@ -183,7 +183,6 @@ set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 set backspace=indent,eol,start
 set clipboard=unnamed
 set updatetime=300
-set lazyredraw
 set synmaxcol=200
 
 if has("autocmd")
