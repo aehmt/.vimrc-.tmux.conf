@@ -34,7 +34,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'sheerun/vim-polyglot'
 Plug 'ap/vim-css-color'
 Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
-Plug 'vim-ruby/vim-ruby'
+Plug 'vim-ruby/vim-ruby', { 'for': ['ruby', 'eruby'] }
 
 " --- LSP & Completion ---
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -50,7 +50,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'Raimondi/delimitMate'
-Plug 'godlygeek/tabular'
+Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
 
 " --- Git ---
 Plug 'tpope/vim-fugitive'
@@ -62,25 +62,24 @@ Plug 'jacoborus/tender'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'Yggdroot/indentLine'
-Plug 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 
 " --- Tmux Integration ---
 Plug 'benmills/vimux'
 Plug 'edkolev/tmuxline.vim'
-Plug 'edkolev/promptline.vim'
+Plug 'edkolev/promptline.vim', { 'on': 'PromptlineSnapshot' }
 
 " --- Snippets ---
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 
 " --- Search ---
-Plug 'rking/ag.vim'
+Plug 'rking/ag.vim', { 'on': 'Ag' }
 
 " --- Misc ---
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install' }
-Plug 'tpope/vim-rails'
-Plug 'scrooloose/Syntastic'
-Plug 'vim-scripts/Vim-R-plugin'
+Plug 'iamcco/markdown-preview.nvim', { 'for': 'markdown', 'do': 'cd app & yarn install' }
+Plug 'tpope/vim-rails', { 'for': ['ruby', 'eruby'] }
+Plug 'vim-scripts/Vim-R-plugin', { 'for': 'r' }
 
 call plug#end()
 
@@ -153,8 +152,10 @@ set laststatus=2
 
 highlight Visual cterm=NONE ctermbg=8 ctermfg=NONE guibg=Grey40
 
-" Airline
+" Airline — only load the extensions we actually use
 let g:airline_powerline_fonts = 1
+let g:airline_highlighting_cache = 1
+let g:airline_extensions = ['tabline', 'coc', 'gitgutter']
 let g:airline#extensions#tabline#enabled = 1
 function! AirlineInit()
   let g:airline_section_a = airline#section#create([])
@@ -181,6 +182,9 @@ set mouse=a
 set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 set backspace=indent,eol,start
 set clipboard=unnamed
+set updatetime=300
+set lazyredraw
+set synmaxcol=200
 
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -195,7 +199,8 @@ let g:startify_change_to_vcs_root = 1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 autocmd StdinReadPre * let s:std_in=1
 autocmd FileType nerdtree cnoreabbrev <buffer> bd <nop>
-autocmd VimEnter * NERDTree | wincmd p
+" Open NERDTree on startup; if a file was given, move focus to it
+autocmd VimEnter * NERDTree | if argc() > 0 | wincmd p | endif
 
 " =============================================================================
 " Plugin Settings
