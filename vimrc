@@ -1,4 +1,15 @@
+set runtimepath^=~/.vim runtimepath+=~/.vim/after
+let &packpath = &runtimepath
 set nocompatible
+
+" let g:python3_host_prog='/opt/homebrew/bin/python3'
+let g:python3_host_prog='/opt/homebrew/bin/python3.11'
+
+" let g:python3_host_prog='/Users/ahmetcalis/.pyenv/shims/python3'
+" let g:python2_host_prog="/usr/bin/python2"
+" let g:ruby_host_prog="/usr/bin/ruby"
+let g:loaded_perl_provider = 0
+let g:loaded_ruby_provider = 0
 
 scriptencoding utf-8
 let plugpath = expand('<sfile>:p:h'). '/autoload/plug.vim'
@@ -54,12 +65,21 @@ Plug 'vim-scripts/Vim-R-plugin'
 Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'rking/ag.vim'
+
+" CodeCompanion start
+" Plug 'nvim-lua/plenary.nvim'
+" Plug 'nvim-treesitter/nvim-treesitter'
+" Plug 'olimorris/codecompanion.nvim'
+" CodeCompanion end
+
+
 call plug#end()
 let g:coc_global_extensions=[ 'coc-lists', 'coc-emmet', 'coc-calc', 'coc-tsserver', 'coc-snippets', 'coc-html', 'coc-css', 'coc-json', 'coc-eslint'] " 'coc-prettier', 'coc-python']
 autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
   \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif
 autocmd FileType json syntax match Comment +\/\/.\+$+
 " Highlight the symbol and its references when holding the cursor.
+"
 autocmd CursorHold * silent call CocActionAsync('highlight')
 augroup mygroup
   autocmd!
@@ -143,6 +163,13 @@ let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 set laststatus=2
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+function! AirlineInit()
+  " only show the path on the left
+  let g:airline_section_a = airline#section#create([])
+  let g:airline_section_y = airline#section#create([])
+  let g:airline_section_z = airline#section#create([])
+endfunction
+autocmd VimEnter * call AirlineInit()
 let g:closetag_filenames = "*.erb,*.html.erb,*.html,*.xhtml,*.phtml,*.js"
 set number
 set relativenumber
@@ -201,6 +228,11 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd FileType nerdtree cnoreabbrev <buffer> bd <nop>
 autocmd VimEnter * NERDTree | wincmd p
+
+
+" auto run eslint with CoC on save
+" autocmd BufWritePre *.js,*.ts,*.tsx :CocCommand eslint.executeAutofix
+
 function! NumberToggle()
 if(&relativenumber == 1)
     set relativenumber!
@@ -241,8 +273,14 @@ if filereadable("/etc/vim/vimrc.local")
 
 endif
 let g:tmuxline_preset = {
-      \'a'    : '#(whoami)',
       \'win'  : ['#I', '#W'],
       \'cwin' : ['#I', '#W '],
       \'y'    : ['%A', '%H:%M', '%Y-%m-%d'],
       \'z'    : '#h'}
+
+
+" CodeCompanion configuration start
+" lua << EOF
+  " require("codecompanion").setup()
+" EOF
+" CodeCompanion configuration end
