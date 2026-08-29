@@ -73,7 +73,7 @@ Plug 'rking/ag.vim'
 
 
 call plug#end()
-let g:coc_global_extensions=[ 'coc-lists', 'coc-emmet', 'coc-calc', 'coc-tsserver', 'coc-snippets', 'coc-html', 'coc-css', 'coc-json', 'coc-eslint'] " 'coc-prettier', 'coc-python']
+let g:coc_global_extensions=[ 'coc-lists', 'coc-emmet', 'coc-calc', 'coc-tsserver', 'coc-snippets', 'coc-html', 'coc-css', 'coc-json', 'coc-eslint', 'coc-prettier'] " 'coc-python']
 autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
   \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif
 autocmd FileType json syntax match Comment +\/\/.\+$+
@@ -108,8 +108,8 @@ let g:coc_snippet_prev = '<S-tab>'
 " :cmap - Display command-line mode maps
 " :omap - Display operator pending mode maps
 nmap <silent> <C-f> <Plug>(coc-cursors-position)
-nnoremap <C-p> :CocList files<CR>
-nnoremap <C-[> :CocList files<CR>
+nnoremap <C-p> :exe 'CocList files ' . trim(system('git rev-parse --show-toplevel 2>/dev/null \|\| pwd'))<CR>
+nnoremap <C-[> :exe 'CocList files ' . trim(system('git rev-parse --show-toplevel 2>/dev/null \|\| pwd'))<CR>
 " nnoremap <C-[> :CocListResume<CR>
 nnoremap <leader>fw :CocSearch<space>
 nmap gd :call CocAction('jumpDefinition', 'drop')<CR>
@@ -212,6 +212,7 @@ function! P_Compile()
         return c
     endif
 endfunc
+let g:startify_change_to_vcs_root = 1
 let g:NERDTreeWinSize = 25
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 autocmd StdinReadPre * let s:std_in=1
