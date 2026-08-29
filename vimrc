@@ -199,8 +199,7 @@ let g:startify_change_to_vcs_root = 1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 autocmd StdinReadPre * let s:std_in=1
 autocmd FileType nerdtree cnoreabbrev <buffer> bd <nop>
-" Open NERDTree on startup; if a file was given, move focus to it
-autocmd VimEnter * NERDTree | if argc() > 0 | wincmd p | endif
+autocmd VimEnter * NERDTree | wincmd p
 
 " =============================================================================
 " Plugin Settings
