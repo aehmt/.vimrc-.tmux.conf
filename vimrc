@@ -41,7 +41,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'mhinz/vim-startify' "remember state of the vim
 Plug 'benmills/vimux'
-Plug 'Lokaltog/vim-powerline'
 Plug 'edkolev/tmuxline.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -94,7 +93,6 @@ nnoremap <leader>v :call CocAction("doHover")<cr>
 " imap <C-j> <Plug>(coc-snippets-expand-jump)
 snoremap <C-j> <space>
 vnoremap <C-j> <space>
-nnoremap <C-j> <space>
 inoremap <expr> <C-l>  pumvisible() ? "\<C-n>" : "\<left>"
 function! s:check_back_space() abort
   let col = col('.') - 1
@@ -118,10 +116,8 @@ nmap gd :call CocAction('jumpDefinition', 'drop')<CR>
 vmap <leader>pf  <Plug>(coc-format-selected)
 nmap <leader>pf  <Plug>(coc-format-selected)
 nmap <leader>fp  :CocCommand prettier.formatFile<CR>
-filetype off " required
 if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
   let &t_8f="\e[38;2;%ld;%ld;%ldm"
   let &t_8b="\e[48;2;%ld;%ld;%ldm"
@@ -143,10 +139,6 @@ nnoremap <S-Tab> :bp!<CR>
 " other plugin before putting this into your config.
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() :
                                            \"\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
 
 let g:surround_116 = "{/* \r\ */}"
 let g:delimitMate_expand_space = 1
@@ -220,12 +212,9 @@ function! P_Compile()
         return c
     endif
 endfunc
-nnoremap <leader>q :bp<cr>:bd #<cr>
 let g:NERDTreeWinSize = 25
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-autocmd vimenter * NERDTree
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 autocmd FileType nerdtree cnoreabbrev <buffer> bd <nop>
 autocmd VimEnter * NERDTree | wincmd p
 
@@ -250,7 +239,6 @@ nmap <leader>1s   :w \| call VimuxRunCommand("rspec" .expand('%:p'). ":".line('.
 imap <C-h> <left>
 imap <C-j> <down>
 imap <C-k> <up>
-imap <C-l> <right>
 nnoremap <C-z> a
 imap ;w <ESC>:w<CR>
 nmap <leader>py :call VimuxRunCommand("python -m SimpleHTTPServer") <CR>
